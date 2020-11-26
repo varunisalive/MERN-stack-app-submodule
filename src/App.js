@@ -6,17 +6,23 @@ class App extends React.Component{
   state = {
     title: "",
     body: ""
-  }
+  };
 
-  handleChange = (event)=>{
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+  // handleChange = (event)=>{
+  //   const target = event.target;
+  //   const name = target.name;
+  //   const value = target.value;
 
-    this.setState({
-      [name]: value
-    })
-  }
+  //   this.setState({
+  //     [name]: value
+  //   })
+  // }
+
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+
+    this.setState({ [name]: value });
+  };
 
   submit = (event) => {
     event.preventDefault();
@@ -33,12 +39,19 @@ class App extends React.Component{
     })
       .then(() => {
         console.log("Data has been sent to the server successfully");
+        this.resetUserInput();
       })
       .catch((err) => {
         console.log("Error detected");
       });
-  }
+  };
 
+  resetUserInput = () => {
+    this.setState({
+      title: "",
+      body: ""
+    });
+  };
   
 
   render() {
